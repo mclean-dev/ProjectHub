@@ -1,12 +1,17 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from 'react'
-import { AppBar, Box, Toolbar, Typography, Button, Avatar, Link } from '@mui/material'
-import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom'
-
-import decode from 'jwt-decode'
+import { AppBar, Toolbar, Typography, Button, Avatar } from '@mui/material'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import decode from 'jwt-decode'
 
-export default function NavBar() {
+
+// import memoriesLogo from '../../images/memories-Logo.png'
+// import memoriesText from '../../images/memories-Text.png'
+
+
+
+const Navbar = () => {
+    
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -19,7 +24,6 @@ export default function NavBar() {
         setUser(null)
 
     }
-
     useEffect(() => {
         const token = user?.token
 
@@ -34,17 +38,24 @@ export default function NavBar() {
     }, [location])
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="static" sx={{ borderRadius: 1 }}>
-            <Toolbar>
-              <Link component={RouterLink} to="/"><Typography variant="h6" component="div" sx={{ flexGrow: 1, textDecoration: "none" }}>
-            ProjectBase
-          </Typography>
-          </Link>
-
-             </Toolbar>
-          </AppBar>
-        </Box>
-     )
+        <AppBar  position="static" color="inherit">
+            <Link to="/" className="brandContainer">
+                {/* <img src={memoriesText} alt="icon" height="45px" />
+                    <img  src={memoriesLogo} alt="icon" height="40px" /> */}
+            </Link>
+            <Toolbar >
+                {user ? (
+                    <div >
+                        <Avatar  alt={user.result.name} src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
+                        <Typography  variant="h6">{user.result.name}</Typography>
+                        <Button variant="contained"  color="secondary" onClick={logout}>Logout</Button>
+                    </div>
+                ) : (
+                    <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
+                )}
+            </Toolbar>
+        </AppBar>
+    )
 }
 
+export default Navbar
