@@ -11,6 +11,7 @@ import CommentSection from './CommentSection'
 
 const PostDetails = () => {
     const { post, posts, isLoading } = useSelector((state) => state.posts)
+    const test = useSelector((state) => console.log(state))
     const dispatch = useDispatch()
     const navigate = useNavigate()
     
@@ -23,7 +24,7 @@ const PostDetails = () => {
 
     useEffect(() => {
       if(post) {
-        dispatch(getPostsBySearch({ search: 'none', tags: post?.tags.join(',')}))
+        dispatch(getPostsBySearch('none'))
       }
          
     }, [post])

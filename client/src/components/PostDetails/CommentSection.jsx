@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import { Typography, TextField, Button } from "@mui/material";
 import { useDispatch } from "react-redux";
 
-import useStyles from "./styles";
 import { commentPost } from '../../actions/posts'
 
 const CommentSection = ({ post }) => {
