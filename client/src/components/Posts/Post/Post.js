@@ -14,6 +14,7 @@ import {
   Stack,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import CodeOffIcon from '@mui/icons-material/CodeOff';
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import EditIcon from "@mui/icons-material/Edit";
 import moment from "moment";
@@ -22,6 +23,8 @@ import { deletePost, likePost } from "../../../actions/posts";
 import { useNavigate } from "react-router-dom";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbUpAltOutlined from "@mui/icons-material/ThumbUpAltOutlined";
+
+import placeholder from '../../../placeholder.png'
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
@@ -84,7 +87,7 @@ const Post = ({ post, setCurrentId }) => {
       <CardActionArea onClick={openPost}>
         <CardMedia
           height="0"
-          image={post?.selectedFile}
+          image={post?.selectedFile || placeholder}
           title={post.title}
           alt={post.title}
           sx={{
@@ -92,7 +95,7 @@ const Post = ({ post, setCurrentId }) => {
             backgroundColor: "rgba(0, 0, 0, 0.3)",
             backgroundBlendMode: "darken",
           }}
-        />
+        /> 
         <CardContent
           sx={{
             display: "flex",
