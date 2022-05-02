@@ -73,7 +73,7 @@ const PostDetails = () => {
           justifyContent: "center",
           alignItems: "center",
           padding: "20px",
-          borderRadius: "15px",
+          borderRadius: "5px",
           height: "39vh",
         }}
       >
@@ -86,9 +86,9 @@ const PostDetails = () => {
     : posts;
   const openPost = (_id) => navigate(`/posts/${_id}`);
   return (
-    <Paper style={{ padding: "20px", borderRadius: "10px" }} elevation={6}>
+    <Paper style={{ padding: "20px", borderRadius: "5px" }} elevation={6}>
       <PostCard>
-        <Box sx={{ borderRadius: "10px", margin: 1, flex: 1 }}>
+        <Box sx={{ borderRadius: "5px", margin: 1, flex: 1 }}>
           <Typography variant="h3" component="h2">
             {post.title}
           </Typography>
@@ -125,7 +125,7 @@ const PostDetails = () => {
           />
         </ImageSection>
       </PostCard>
-      {recommendedPosts.length && (
+      {recommendedPosts.length ? (
         <Box sx={{ borderRadius: 1, margin: "10px", flex: 1 }}>
           <Typography gutterBottom variant="h5">
             You might also like:{" "}
@@ -133,10 +133,11 @@ const PostDetails = () => {
           <Divider />
           <RecPosts>
             {recommendedPosts.map(
-              ({ title, message, name, likes, selectedFile, _id }) => (
+              ({ title, message, name, selectedFile, _id }) => (
                 <Card
                   variant="outlined"
                   sx={{ margin: "20px", cursor: "pointer" }}
+                  key={_id}
                 >
                   <CardActionArea onClick={() => openPost(_id)} key={_id}>
                     <CardMedia
@@ -171,7 +172,7 @@ const PostDetails = () => {
             )}
           </RecPosts>
         </Box>
-      )}
+      ) : <Typography variant="h6">There are no Recommended Posts.</Typography>}
     </Paper>
   );
 };

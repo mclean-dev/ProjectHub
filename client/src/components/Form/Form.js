@@ -51,8 +51,7 @@ const Form = ({ currentId, setCurrentId }) => {
     );
   }
   return (
-    <Paper elevation={6} sx={{ padding: 2 }}>
-      {/* <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit} > */}
+    <Paper elevation={6} sx={{ padding: 2, borderRadius: "5px" }}>
       <form
         autoComplete="off"
         noValidate
@@ -117,7 +116,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
         <Button
           variant="contained"
-          color="secondary"
+          color="primary"
           size="small"
           onClick={clear}
           fullWidth

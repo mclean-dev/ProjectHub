@@ -76,7 +76,7 @@ const Post = ({ post, setCurrentId }) => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        borderRadius: "10px",
+        borderRadius: "5px",
         height: "100%",
         position: "relative",
       }}
