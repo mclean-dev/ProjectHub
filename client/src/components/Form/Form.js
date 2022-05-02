@@ -86,15 +86,15 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name="tags"
           variant="outlined"
-          label="Tags"
+          label="Tags (comma separated)"
           fullWidth
           margin="dense"
           value={postData.tags}
           onChange={(e) =>
-            setPostData({ ...postData, tags: e.target.value.split(",") })
+            setPostData({ ...postData, tags: e.target.value.split(/,\s|,/)})
           }
         />
-        <Box sx={{ width: "97%", margin: "10px 0" }}>
+        <Box sx={{ width: "97%", margin: "10px 0", display: "flex"}}>
           <FileBase
             type="file"
             multiple={false}
