@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Avatar, Button, Paper, Grid, Typography, Container } from '@mui/material'
+import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import { GoogleLogin } from 'react-google-login'
 import { useDispatch } from 'react-redux'
@@ -55,11 +55,11 @@ const Auth = () => {
   }
   return (
     <Container component="main" maxWidth='xs'>
-      <Paper elevation={3}>
+        <Paper elevation={3} sx={{padding: 2, display: "flex", flexDirection: "column", alignItems: "center"}}>
         <Avatar >
           <LockOutlinedIcon />
         </Avatar>
-        <Typography variant="h5">{isSignup ? 'Sign Up' : 'Sign In'}</Typography>
+        <Typography variant="h5" gutterBottom>{isSignup ? 'Sign Up' : 'Sign In'}</Typography>
         <form  onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             {
@@ -75,11 +75,11 @@ const Auth = () => {
             {isSignup && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" />}
 
           </Grid>
-          <Button type="submit" fullWidth variant="contained" color="primary" >{isSignup ? 'Sign Up' : 'Sign In'}</Button>
+          <Button sx={{mt: 1, mb: 1}} type="submit" fullWidth variant="contained" color="primary" >{isSignup ? 'Sign Up' : 'Sign In'}</Button>
           <GoogleLogin
             clientId="386647237443-6oqe5tpv3tcsss91t027da2nhvn58fef.apps.googleusercontent.com"
             render={(renderProps) => (
-              <Button  color='primary' fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained" >
+              <Button sx={{mb: 1}} color='primary' fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained" >
                 Google Sign In
               </Button>
             )}
