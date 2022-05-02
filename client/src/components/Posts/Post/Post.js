@@ -20,8 +20,13 @@ import { deletePost, likePost } from "../../../actions/posts";
 import { useNavigate } from "react-router-dom";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbUpAltOutlined from "@mui/icons-material/ThumbUpAltOutlined";
+import { styled } from "@mui/material/styles";
 
 import placeholder from "../../../images/placeholder.png";
+
+// const Message = styled(<Typography />)(({ theme }) => ({
+
+// })
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
@@ -123,7 +128,17 @@ const Post = ({ post, setCurrentId }) => {
             {post.title}
           </Typography>
 
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="p"
+            sx={{
+              display: "-webkit-box",
+              WebkitLineClamp: "6",
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+            }}
+          >
             {post.message}
           </Typography>
         </CardContent>

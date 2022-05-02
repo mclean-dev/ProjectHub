@@ -36,6 +36,7 @@ const ImageSection = styled("div")(({ theme }) => ({
 
 const RecPosts = styled("div")(({ theme }) => ({
   display: "flex",
+  justifyContent: "flex-start",
   flexWrap: "wrap",
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column",
@@ -117,7 +118,7 @@ const PostDetails = () => {
             image={post.selectedFile || placeholder}
             alt={post.title}
             sx={{
-              borderRadius: "10px",
+              borderRadius: "5px",
               objectFit: "cover",
               width: "100%",
               maxHeight: "600px",
@@ -136,7 +137,8 @@ const PostDetails = () => {
               ({ title, message, name, selectedFile, _id }) => (
                 <Card
                   variant="outlined"
-                  sx={{ margin: "20px", cursor: "pointer" }}
+                  
+                  sx={{ width: "250px", margin: "20px", cursor: "pointer", flex: "0 1 auto" }}
                   key={_id}
                 >
                   <CardActionArea onClick={() => openPost(_id)} key={_id}>
@@ -160,7 +162,14 @@ const PostDetails = () => {
                       {name}
                     </Typography>
                     <Typography
-                      sx={{ padding: "0 1rem" }}
+                      sx={{
+                        padding: "0 1rem",
+                        width: "250px",
+                        display: "-webkit-box",
+                        WebkitLineClamp: "6",
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                      }}
                       gutterBottom
                       variant="subtitle2"
                     >
@@ -172,7 +181,9 @@ const PostDetails = () => {
             )}
           </RecPosts>
         </Box>
-      ) : <Typography variant="h6">There are no Recommended Posts.</Typography>}
+      ) : (
+        <Typography variant="h6">There are no Recommended Posts.</Typography>
+      )}
     </Paper>
   );
 };

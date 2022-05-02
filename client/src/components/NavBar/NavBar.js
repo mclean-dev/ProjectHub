@@ -25,9 +25,9 @@ import { getPostsBySearch } from "../../actions/posts";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: alpha(theme.palette.common.black, 0.15),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme.palette.common.black, 0.25),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
@@ -46,6 +46,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  color: "#616161",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -54,6 +55,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
+    color: "#424242",
     width: "100%",
     [theme.breakpoints.up("md")]: {
       width: "20ch",
@@ -113,14 +115,14 @@ const Navbar = () => {
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ borderRadius: 1, mb: 3 }}>
+      <AppBar position="static" sx={{ backgroundColor: "white", borderRadius: 1, mb: 3 }}>
         <Toolbar sx={{ justifyContent: "space-between", padding: "0 0.5rem" }}>
           <Stack direction="row">
             <Link
               to="/"
               component={RouterLink}
               variant="h5"
-              color="inherit"
+              color="black"
               underline="none"
               sx={{
                 mr: 1,
@@ -179,10 +181,10 @@ const Navbar = () => {
                 <Avatar alt={user.result.name} src={user.result.imageUrl}>
                   {user.result.name.charAt(0)}
                 </Avatar>
-                <Typography variant="h6" sx={{ lineHeight: "2" }}>
+                <Typography variant="h6" color="black" sx={{ lineHeight: "2" }}>
                   {user.result.name}
                 </Typography>
-                <Button variant="contained" color="secondary" onClick={logout}>
+                <Button variant="contained" color="primary" onClick={logout}>
                   <Typography>Logout</Typography>
                 </Button>
               </Stack>
@@ -192,7 +194,7 @@ const Navbar = () => {
               component={RouterLink}
               to="/auth"
               variant="contained"
-              color="secondary"
+              color="primary"
               spacing={{ xs: 0, sm: 1, md: 1, lg: 1 }}
             >
               Login
