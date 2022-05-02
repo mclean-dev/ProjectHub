@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Box,
   AppBar,
@@ -9,7 +9,6 @@ import {
   Link,
   Stack,
   useMediaQuery,
-  TextField,
   InputBase,
   Menu,
   MenuItem,
@@ -21,14 +20,8 @@ import { useDispatch } from "react-redux";
 import decode from "jwt-decode";
 import CodeIcon from "@mui/icons-material/Code";
 
-import { getPosts, getPostsBySearch } from "../../actions/posts";
+import { getPostsBySearch } from "../../actions/posts";
 
-import openingTag from "../../images/openingTag.png";
-import closingTag from "../../images/closingTag.png";
-
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -44,6 +37,7 @@ const Search = styled("div")(({ theme }) => ({
     width: "auto",
   },
 }));
+
 const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: "100%",
@@ -53,11 +47,11 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "center",
 }));
+
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -66,6 +60,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+
 const Navbar = () => {
   const isMobile = useMediaQuery("(max-width: 600px)");
   const isMed = useMediaQuery("(max-width: 900px)");
@@ -73,9 +68,7 @@ const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const query = useQuery();
   const location = useLocation();
-  const searchQuery = query.get("searchQuery");
   const [search, setSearch] = useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -86,12 +79,13 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
-  const logout = () => {
+  const logout = useCallback(() => {
     dispatch({ type: "LOGOUT" });
 
     navigate("/");
     setUser(null);
-  };
+  }, [dispatch, navigate]);
+
   useEffect(() => {
     const token = user?.token;
 
@@ -101,7 +95,7 @@ const Navbar = () => {
     }
 
     setUser(JSON.parse(localStorage.getItem("profile")));
-  }, [location]);
+  }, [location, user?.token, logout]);
 
   const handleKeyPress = (e) => {
     setSearch(e.target.value);
@@ -156,7 +150,6 @@ const Navbar = () => {
                   aria-controls={open ? "basic-menu" : undefined}
                   aria-haspopup="true"
                   aria-expanded={open ? "true" : undefined}
-                  color="secondary"
                   onClick={handleClick}
                 >
                   <Avatar alt={user.result.name} src={user.result.imageUrl}>
@@ -165,8 +158,11 @@ const Navbar = () => {
                 </Button>
                 <Menu
                   id="basic-menu"
-                  sx={{display: "flex", justifyContent: "center", alignItems: "center"}}
-
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
                   anchorEl={anchorEl}
                   open={open}
                   onClose={handleClose}
@@ -187,7 +183,7 @@ const Navbar = () => {
                   {user.result.name}
                 </Typography>
                 <Button variant="contained" color="secondary" onClick={logout}>
-                  Logout
+                  <Typography>Logout</Typography>
                 </Button>
               </Stack>
             )

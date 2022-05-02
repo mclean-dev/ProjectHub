@@ -44,7 +44,6 @@ const RecPosts = styled("div")(({ theme }) => ({
 
 const PostDetails = () => {
   const { post, posts, isLoading } = useSelector((state) => state.posts);
-  const test = useSelector((state) => console.log(state));
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -52,7 +51,7 @@ const PostDetails = () => {
 
   useEffect(() => {
     dispatch(getPost(id));
-  }, [id]);
+  }, [id, dispatch]);
 
   useEffect(() => {
     if (post) {
@@ -61,7 +60,7 @@ const PostDetails = () => {
       )})`;
       dispatch(getPostsBySearch(searchQuery));
     }
-  }, [post]);
+  }, [post, dispatch]);
 
   if (!post) return null;
 

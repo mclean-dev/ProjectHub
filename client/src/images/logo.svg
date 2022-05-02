@@ -7,7 +7,7 @@
    width="20.610001"
    height="19.799999"
    inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
-   inkscape:export-filename="C:\Users\mclea\Documents\projects\ProjectHub\client\src\logo.png"
+   inkscape:export-filename="C:\Users\mclea\Documents\projects\ProjectHub\client\src\openingTag.png"
    inkscape:export-xdpi="1863.17"
    inkscape:export-ydpi="1863.17"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -42,4 +42,12 @@
        d="M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"
        id="path3" />
   </g>
+  <path
+     style="fill:#ffffff;stroke-width:0.0550765;stroke-linecap:round;stroke-linejoin:round"
+     d="M 3.6212692,12.171895 0.63347484,9.1840051 3.6212692,6.1961156 6.6090634,3.2082263 l 0.688449,0.688449 0.688449,0.688449 -2.2993166,2.2994403 -2.2993169,2.2994405 2.2993169,2.2994409 2.2993166,2.29944 -0.688449,0.688449 -0.688449,0.688449 z"
+     id="path896" />
+  <path
+     style="fill:#ffffff;stroke-width:0.0550765;stroke-linecap:round;stroke-linejoin:round"
+     d="m 13.913563,14.478101 -0.681295,-0.681704 2.299374,-2.29925 2.299373,-2.2992499 -2.299516,-2.2996388 -2.299517,-2.2996389 0.688608,-0.6881952 0.688609,-0.6881952 2.98782,2.9877251 2.98782,2.9877252 -2.980967,2.9810627 c -1.639533,1.639584 -2.987279,2.981063 -2.994991,2.981063 -0.0077,0 -0.320606,-0.306767 -0.695318,-0.681704 z"
+     id="path935" />
 </svg>

@@ -9,13 +9,10 @@ import {
   Button,
   IconButton,
   Typography,
-  useRadioGroup,
   Box,
   Stack,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import CodeOffIcon from '@mui/icons-material/CodeOff';
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import EditIcon from "@mui/icons-material/Edit";
 import moment from "moment";
 import { useDispatch } from "react-redux";
@@ -24,7 +21,7 @@ import { useNavigate } from "react-router-dom";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbUpAltOutlined from "@mui/icons-material/ThumbUpAltOutlined";
 
-import placeholder from '../../../images/placeholder.png'
+import placeholder from "../../../images/placeholder.png";
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
@@ -95,7 +92,7 @@ const Post = ({ post, setCurrentId }) => {
             backgroundColor: "rgba(0, 0, 0, 0.3)",
             backgroundBlendMode: "darken",
           }}
-        /> 
+        />
         <CardContent
           sx={{
             display: "flex",
@@ -116,7 +113,7 @@ const Post = ({ post, setCurrentId }) => {
               {moment(post.createdAt).fromNow()}
             </Typography>
           </Box>
-         
+
           <div>
             <Typography variant="body2" color="textSecondary">
               {post.tags.map((tag) => `#${tag} `)}
@@ -148,7 +145,7 @@ const Post = ({ post, setCurrentId }) => {
               aria-label="Edit post"
               onClick={() => setCurrentId(post._id)}
             >
-                <EditIcon fontSize="small" />
+              <EditIcon fontSize="small" />
             </IconButton>
             <IconButton
               size="small"
