@@ -11,17 +11,20 @@ import {
   useMediaQuery,
   TextField,
   InputBase,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link as RouterLink, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import decode from "jwt-decode";
+import CodeIcon from "@mui/icons-material/Code";
 
 import { getPosts, getPostsBySearch } from "../../actions/posts";
 
-// import memoriesLogo from '../../images/memories-Logo.png'
-// import memoriesText from '../../images/memories-Text.png'
+import openingTag from "../../images/openingTag.png";
+import closingTag from "../../images/closingTag.png";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -65,6 +68,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 const Navbar = () => {
   const isMobile = useMediaQuery("(max-width: 600px)");
+  const isMed = useMediaQuery("(max-width: 900px)");
+
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -72,6 +77,14 @@ const Navbar = () => {
   const location = useLocation();
   const searchQuery = query.get("searchQuery");
   const [search, setSearch] = useState("");
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const logout = () => {
     dispatch({ type: "LOGOUT" });
@@ -107,47 +120,86 @@ const Navbar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ borderRadius: 1, mb: 3 }}>
-        <Toolbar sx={{ justifyContent: "space-between" }}>
-          <Link
-            to="/"
-            component={RouterLink}
-            variant="h4"
-            color="inherit"
-            underline="none"
-            sx={{ mr: 2 }}
-          >
-            ProjectHub
-          </Link>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-              onKeyUp={handleKeyPress}
-            />
-          </Search>
-
+        <Toolbar sx={{ justifyContent: "space-between", padding: "0 0.5rem" }}>
+          <Stack direction="row">
+            <Link
+              to="/"
+              component={RouterLink}
+              variant="h5"
+              color="inherit"
+              underline="none"
+              sx={{
+                mr: 1,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {isMobile ? <CodeIcon fontSize="large" /> : "ProjectHub"}
+            </Link>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+                onKeyUp={handleKeyPress}
+              />
+            </Search>
+          </Stack>
           {user ? (
-            <Stack direction="row" spacing={2}>
-              <Avatar alt={user.result.name} src={user.result.imageUrl}>
-                {user.result.name.charAt(0)}
-              </Avatar>
-              <Typography variant="h6">{user.result.name}</Typography>
-              <Button variant="contained" color="secondary" onClick={logout}>
-                Logout
-              </Button>
-            </Stack>
+            isMed ? (
+              <>
+                <Button
+                  id="basic-button"
+                  aria-controls={open ? "basic-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  color="secondary"
+                  onClick={handleClick}
+                >
+                  <Avatar alt={user.result.name} src={user.result.imageUrl}>
+                    {user.result.name.charAt(0)}
+                  </Avatar>
+                </Button>
+                <Menu
+                  id="basic-menu"
+                  sx={{display: "flex", justifyContent: "center", alignItems: "center"}}
+
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}
+                >
+                  <MenuItem onClick={handleClose}>{user.result.name}</MenuItem>
+                  <MenuItem onClick={logout}>Logout</MenuItem>
+                </Menu>
+              </>
+            ) : (
+              <Stack direction="row" spacing={2}>
+                <Avatar alt={user.result.name} src={user.result.imageUrl}>
+                  {user.result.name.charAt(0)}
+                </Avatar>
+                <Typography variant="h6" sx={{ lineHeight: "2" }}>
+                  {user.result.name}
+                </Typography>
+                <Button variant="contained" color="secondary" onClick={logout}>
+                  Logout
+                </Button>
+              </Stack>
+            )
           ) : (
             <Button
               component={RouterLink}
               to="/auth"
               variant="contained"
               color="secondary"
-              sx={{ mr: 1, ml: 1 }}
+              spacing={{ xs: 0, sm: 1, md: 1, lg: 1 }}
             >
-              Sign In
+              Login
             </Button>
           )}
         </Toolbar>

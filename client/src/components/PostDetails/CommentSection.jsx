@@ -1,8 +1,17 @@
-import React, { useState, useRef } from "react";
-import { Typography, TextField, Button } from "@mui/material";
+import React, { useState, useRef, useEffect } from "react";
+import { Typography, TextField, Button, Box} from "@mui/material";
 import { useDispatch } from "react-redux";
+import { styled } from "@mui/material/styles";
 
 import { commentPost } from '../../actions/posts'
+
+const CommentBox = styled(Box)(({ theme }) => ({
+  display: 'flex', 
+  justifyContent: 'space-between',
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+  }
+}))
 
 const CommentSection = ({ post }) => {
   ;
@@ -14,15 +23,23 @@ const CommentSection = ({ post }) => {
 
   const handleClick = async () => {
       const finalComment = `${user.result.name}: ${comment}`
-      const newComments = await dispatch(commentPost(finalComment, post._id))
-      setComments(newComments)
+      setComments([...comments, finalComment])
       setComment('')
-
-      commentsRef.current.scrollIntoView({ behavior: 'smooth'})
+      console.log(commentsRef)
+      console.log(commentsRef.current)
+      dispatch(commentPost(finalComment, post._id))
   }
+
+  useEffect(() => {
+    
+    commentsRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest'})
+   
+  }, [comments])
+  
+
   return (
-    <div >
-      <div >
+    <CommentBox>
+      <div style={{ height: '200px', overflowY: 'auto'}} >
         <Typography gutterBottom variant="h6">
           Comments
         </Typography>
@@ -35,7 +52,7 @@ const CommentSection = ({ post }) => {
         <div ref={commentsRef} />
       </div>
       {user?.result.name && (
-        <div style={{ width: "70%" }}>
+        <div style={{margin: "0 0.5rem"}}>
         <Typography gutterBottom variant="subtitle1">
           Write a comment
         </Typography>
@@ -58,7 +75,7 @@ const CommentSection = ({ post }) => {
         >Add comment.</Button>
       </div>
       )}
-    </div>
+    </CommentBox>
   );
 };
 

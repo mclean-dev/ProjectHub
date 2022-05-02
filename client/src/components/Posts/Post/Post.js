@@ -24,7 +24,7 @@ import { useNavigate } from "react-router-dom";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbUpAltOutlined from "@mui/icons-material/ThumbUpAltOutlined";
 
-import placeholder from '../../../placeholder.png'
+import placeholder from '../../../images/placeholder.png'
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
