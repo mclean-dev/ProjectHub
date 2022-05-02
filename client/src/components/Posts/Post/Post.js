@@ -26,6 +26,7 @@ import placeholder from "../../../images/placeholder.png";
 
 
 const Post = ({ post, setCurrentId }) => {
+  
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
   const navigate = useNavigate();
