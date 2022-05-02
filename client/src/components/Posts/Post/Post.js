@@ -20,13 +20,10 @@ import { deletePost, likePost } from "../../../actions/posts";
 import { useNavigate } from "react-router-dom";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbUpAltOutlined from "@mui/icons-material/ThumbUpAltOutlined";
-import { styled } from "@mui/material/styles";
 
 import placeholder from "../../../images/placeholder.png";
 
-// const Message = styled(<Typography />)(({ theme }) => ({
 
-// })
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
