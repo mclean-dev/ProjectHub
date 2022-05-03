@@ -1,0 +1,3 @@
+# ProjectHub
+
+I started with a couple tutorials on MERN, built a sample MERN app (in my sample-mern-app repo) and then refactored it here. My focus with all this was to learn the basic structure of a CRUD app on the MERN stack. This app has auth (JWT and Google login), all the basic CRUD operations, search, and pagination. While the focus was on learning how to connect a frontend and backend rather than the UI/UX of the frontend, I used Material UI for React for the frontend and enjoyed learning the basics of that as well.
